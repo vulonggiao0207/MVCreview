@@ -7,89 +7,23 @@ namespace MVCreview.Models
 {
     public class Order
     {
-        private int customerId;    
-        private string orderDate;
-        private int numberOfGuest;
-        private string note;
-        private decimal paid;
-        private bool del;
+       public int OrderID { get; set; }
 
-        public int CustomerId
-        {
-            get
-            {
-                return customerId;
-            }
+        public Customer Customer { get; set; }
+        public int CustomerID { get; set; }           
 
-            set
-            {
-                customerId = value;
-            }
-        }
+        public string OrderDate { get; set; }
+       
 
-        public string OrderDate
-        {
-            get
-            {
-                return orderDate;
-            }
+        public int NumberOfGuest { get; set; }
 
-            set
-            {
-                orderDate = value;
-            }
-        }
 
-        public int NumberOfGuest
-        {
-            get
-            {
-                return numberOfGuest;
-            }
+        public string Note { get; set; }
 
-            set
-            {
-                numberOfGuest = value;
-            }
-        }
 
-        public string Note
-        {
-            get
-            {
-                return note;
-            }
+        public decimal Paid { get; set; }
 
-            set
-            {
-                note = value;
-            }
-        }
 
-        public decimal Paid
-        {
-            get
-            {
-                return paid;
-            }
-
-            set
-            {
-                paid = value;
-            }
-        }
-
-        public bool Del
-        {
-            get
-            {
-                return del;
-            }
-
-            set
-            {
-                del = value;
-            }
-        }
+        public bool Del { get; set; }
     }
 }

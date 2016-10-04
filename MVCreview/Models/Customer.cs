@@ -2,108 +2,34 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using MVCreview.Models;
 
 namespace MVCreview
 {
     public class Customer
     {
-        private int customerId;
-        private string customerName;
-        private string customerAddress;
-        private string customerPhone;
-        private string customerUserName;
-        private string customerPassword;
-        private bool del;
+       
                                       
-        public int CustomerId
-        {
-            get
-            {
-                return customerId;
-            }
+        public int CustomerID { get; set; }
 
-            set
-            {
-                customerId = value;
-            }
-        }
 
-        public string CustomerName
-        {
-            get
-            {
-                return customerName;
-            }
+        public string CustomerName { get; set; }
 
-            set
-            {
-                customerName = value;
-            }
-        }
 
-        public string CustomerAddress
-        {
-            get
-            {
-                return customerAddress;
-            }
+        public string CustomerAddress { get; set; }
 
-            set
-            {
-                customerAddress = value;
-            }
-        }
 
-        public string CustomerPhone
-        {
-            get
-            {
-                return customerPhone;
-            }
+        public string CustomerPhone { get; set; }
 
-            set
-            {
-                customerPhone = value;
-            }
-        }
 
-        public string CustomerUserName
-        {
-            get
-            {
-                return customerUserName;
-            }
+        public string CustomerUserName { get; set; }
 
-            set
-            {
-                customerUserName = value;
-            }
-        }
 
-        public string CustomerPassword
-        {
-            get
-            {
-                return customerPassword;
-            }
+        public string CustomerPassword { get; set; }
 
-            set
-            {
-                customerPassword = value;
-            }
-        }
 
-        public bool Del
-        {
-            get
-            {
-                return del;
-            }
+        public bool Del { get; set; }
 
-            set
-            {
-                del = value;
-            }
-        }
+        public ICollection<Order> Orders { get; set; }
     }
 }

@@ -6,103 +6,27 @@ using System.Web;
 namespace MVCreview.Models
 {
     public class Dish
-    {
-        private int dishID;
-        private string categoryName;
-        private decimal price;
-        private string description;
-        private string imageLink;
-        private decimal availability;
-        private bool del;
-        public int DishID
-        {
-            get
-            {
-                return dishID;
-            }
+    {             
+        public int DishID { get; set; }
+                                           
+        public Category Category { get; set; }
 
-            set
-            {
-                dishID = value;
-            }
-        }
+        public string CategoryName { get; set; }
 
-        public string CategoryName
-        {
-            get
-            {
-                return categoryName;
-            }
+        public decimal Price { get; set; }
 
-            set
-            {
-                categoryName = value;
-            }
-        }
+        public string Description { get; set; }
 
-        public decimal Price
-        {
-            get
-            {
-                return price;
-            }
+        public string ImageLink { get; set; }
 
-            set
-            {
-                price = value;
-            }
-        }
 
-        public string Description
-        {
-            get
-            {
-                return description;
-            }
+        public decimal Availability { get; set; }
 
-            set
-            {
-                description = value;
-            }
-        }
 
-        public decimal Availability
-        {
-            get
-            {
-                return availability;
-            }
 
-            set
-            {
-                availability = value;
-            }
-        }
+        public bool Del { get; set; }
 
-        public bool Del
-        {
-            get
-            {
-                return del;
-            }
+        public ICollection<OrderDetail> OrderDetails { get; set; }
 
-            set
-            {
-                del = value;
-            }
-        }
-
-        public int DishID1
-        {
-            get
-            {
-                return dishID;
-            }
-
-            set
-            {
-                dishID = value;
-            }
-        }
     }
 }

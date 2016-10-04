@@ -7,34 +7,12 @@ namespace MVCreview.Models
 {
     
     public class Category   
-    {
-        private string categoryName;
-        private bool del;
+    {          
+        public string CategoryName { get; set; }        
 
-        public string CategoryName
-        {
-            get
-            {
-                return categoryName;
-            }
+        public bool Del { get; set; }
 
-            set
-            {
-                categoryName = value;
-            }
-        }
-
-        public bool Del
-        {
-            get
-            {
-                return del;
-            }
-
-            set
-            {
-                del = value;
-            }
-        }
+        public ICollection<Dish> Dishes { get; set; }
     }
+
 }
