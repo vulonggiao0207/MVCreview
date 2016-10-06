@@ -215,6 +215,10 @@
     <Compile Include="Migrations\201610050918272_Update_Menu.Designer.cs">
       <DependentUpon>201610050918272_Update_Menu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610060702476_Change_Details_Password.cs" />
+    <Compile Include="Migrations\201610060702476_Change_Details_Password.Designer.cs">
+      <DependentUpon>201610060702476_Change_Details_Password.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Models\Admin.cs" />
@@ -239,6 +243,9 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\LoginPartial.cshtml" />
+    <Content Include="Views\Account\AccountManagement.cshtml" />
+    <Content Include="Views\Account\Details.cshtml" />
+    <Content Include="Views\Account\Password.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -258,6 +265,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610050918272_Update_Menu.resx">
       <DependentUpon>201610050918272_Update_Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610060702476_Change_Details_Password.resx">
+      <DependentUpon>201610060702476_Change_Details_Password.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

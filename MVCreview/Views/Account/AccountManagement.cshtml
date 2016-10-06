@@ -1,0 +1,68 @@
+﻿@model MVCreview.Customer
+
+@{
+    ViewBag.Title = "Account Management";
+}
+
+
+<div>
+    <h4>General Information</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerUserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerUserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerPassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerPassword)
+        </dd>
+      
+       
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit information", "Details", new { CustomerID = Session["customerID"] }) |
+    @Html.ActionLink("Change password", "Password", new { CustomerID = Session["customerID"] }) |
+    @Html.ActionLink("Back to Home", "Index","Home")
+</p>

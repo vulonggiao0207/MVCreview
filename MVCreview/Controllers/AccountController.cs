@@ -17,44 +17,36 @@ namespace MVCreview.Controllers
         }
         //GET:/Account/Login
         [AllowAnonymous]
-        public ActionResult Login(string returnURL)
+        public ActionResult Login()
         {
-            ViewBag.ReturnUrl = returnURL;
-            return View(returnURL);
+            return View();
         }
         //POST:/Acount/Register/LoginViewModel
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Login(LoginViewModel model, string returnURL)
+        public ActionResult Login(LoginViewModel model)
         {
-            try
-            {
+            
                 if (ModelState.IsValid)
                 {
                     DatabaseContext db = new DatabaseContext();
-                    var res = from cus in db.Customers
-                              where cus.CustomerUserName == model.CustomerUserName
-                              || cus.CustomerPassword == model.CustomerPassword
-                              select cus.CustomerName;
-                    if (res != null)
+                   var res = db.Customers.FirstOrDefault(c => c.CustomerUserName == model. CustomerUserName 
+                    && c.CustomerPassword == model.CustomerPassword);
+               
+                if (res != null)
                     {
-                        Session["userName"]= res;
-                        ViewBag.Name = res;
-                        return RedirectToAction(returnURL);
+                        Session["userName"]= res.CustomerName;
+                        Session["customerID"] = res.CustomerID;
+                        return RedirectToAction("Index", "Home");
                         //
                     }
-                    return View("Index","Home");
+                    return View();
                 }
                 else
                 {
-                    return View(ModelState);
+                    return View("Error");
                 }
-            }
-
-            catch
-            {
-                return View(ModelState);
-            }
+          
         }
         // GET: /Account/Register
         [AllowAnonymous]
@@ -76,44 +68,172 @@ namespace MVCreview.Controllers
                     var customer = new Customer {CustomerName=model.CustomerName,CustomerAddress=model.CustomerAddress,
                     CustomerPhone=model.CustomerPhone,CustomerEmail=model.CustomerEmail,CustomerUserName=model.CustomerUserName,CustomerPassword=model.CustomerPassword};
                     db.Customers.Add(customer);
-                    db.SaveChanges();
-
+                    db.SaveChanges();   
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    return View(model);
+                    return View();
+               }
+            }
+            catch
+            {
+                return View("Error");
+            }
+        }
+
+        //GET: Account/Logout
+        public ActionResult LogOut()
+        {
+            Session.Remove("userName");
+            Session.Remove("customerID");
+            return RedirectToAction("Index", "Home");
+        }
+      
+        [AllowAnonymous]
+        //Get: Account/AccountManagement/7
+        public ActionResult AccountManagement(int CustomerID)
+        {
+            try
+            {
+                if (Session["customerID"] != null)
+                {
+                    DatabaseContext db = new DatabaseContext();
+                    Customer res = db.Customers.FirstOrDefault(c => c.CustomerID == CustomerID);
+                    return View(res);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
                 }
             }
             catch
             {
-                return View(model);
-            }
+                return View("Error");
+            }   
         }
-
-        // GET: Account/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Account/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [AllowAnonymous]
+        public ActionResult Details(int CustomerID)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                if (Session["customerID"] != null)
+                {
+                    DatabaseContext db = new DatabaseContext();
+                    Customer res = db.Customers.FirstOrDefault(c => c.CustomerID == CustomerID);
+                    DetailsViewModel details = new DetailsViewModel();
+                    details.CustomerID = res.CustomerID;
+                    details.CustomerAddress = res.CustomerAddress;
+                    details.CustomerEmail = res.CustomerEmail;
+                    details.CustomerName = res.CustomerName;
+                    details.CustomerPhone = res.CustomerPhone;                       
+                    return View(details);
+                }
+                else
+                {
+                    return RedirectToAction("AccountManagement", "Account");
+                }
             }
             catch
             {
-                return View();
+                return View("Error");
+            }
+            return View();
+        }
+        //POST:/Account/Register/RegisterViewModel   
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult Details(DetailsViewModel model)
+        {
+            try
+            {
+                // TODO: Add insert logic here    
+                if (ModelState.IsValid)
+                {
+                    DatabaseContext db = new DatabaseContext();
+                    Customer customer = db.Customers.FirstOrDefault(c => c.CustomerID == model.CustomerID);
+
+                    customer.CustomerID = model.CustomerID;
+                    customer.CustomerName = model.CustomerName;
+                    customer.CustomerAddress = model.CustomerAddress;
+                    customer.CustomerPhone = model.CustomerPhone;
+                    customer.CustomerEmail = model.CustomerEmail;      
+                    
+                    
+                    db.SaveChanges();
+                    Session["userName"] = model.CustomerName;
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            catch
+            {
+                return View("Error");
+            }
+        }
+        [AllowAnonymous]
+        public ActionResult Password(int CustomerID)
+        {
+            try
+            {
+                if (Session["customerID"] != null)
+                {
+                    DatabaseContext db = new DatabaseContext();
+                    Customer res = db.Customers.FirstOrDefault(c => c.CustomerID == CustomerID);
+                    PasswordViewModel password = new PasswordViewModel();
+                    password.CustomerID = res.CustomerID;
+                    password.CustomerUserName = res.CustomerUserName;
+
+                    return View(password);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            catch
+            {
+                return View("Error");
+            }
+        }
+        //POST:/Account/Register/RegisterViewModel   
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult Password(PasswordViewModel model)
+        {
+            try
+            {
+                // TODO: Add insert logic here    
+                if (ModelState.IsValid)
+                {
+                    DatabaseContext db = new DatabaseContext();
+                    Customer customer = db.Customers.FirstOrDefault(c => c.CustomerID == model.CustomerID);
+                  
+                    customer.CustomerID = model.CustomerID;
+                    customer.CustomerUserName = model.CustomerUserName;
+                    customer.CustomerPassword = model.NewPassword;                        
+                    db.SaveChanges();
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            catch
+            {
+                return View("Error");
             }
         }
 
 
-       
+
+
+
     }
 }

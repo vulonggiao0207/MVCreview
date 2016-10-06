@@ -1,26 +1,20 @@
-﻿@{  string str = "";
-    if (ViewBag.Name != null)
-    {
-        str = ViewBag.Name.ToString();
-    }
-}
-@if (Request.IsAuthenticated)
+﻿@if (Session["userName"]!=null)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
         @Html.AntiForgeryToken()
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @Html.ActionLink("Hello " + Session["userName"] + "!", "Index", "Home")
+                @Html.ActionLink(Session["userName"] + "!", "AccountManagement", "Account", new { CustomerID = Session["customerID"]},null)
             </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
         </ul>
     } // </form>
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Register", "Register", "Account")</li>
         <li>@Html.ActionLink("Log in", "Login", "Account")</li>
     </ul>
 }

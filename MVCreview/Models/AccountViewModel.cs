@@ -49,7 +49,63 @@ namespace MVCreview.Models
         [StringLength(12, MinimumLength = 6)]
         [Display(Name ="Confirm Password:")]
         [DataType(DataType.Password)]
-        [Compare("CustomerUserName", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("CustomerPassword", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+    }
+    public class DetailsViewModel
+    {
+        [Key]                                                 
+        [Required]
+        [Display(Name = "ID")]
+        public int CustomerID { get; set; }
+
+        [Required]
+        [StringLength(12, MinimumLength = 6)]
+        [Display(Name = "Name")]
+        public string CustomerName { get; set; }
+
+        [Required]
+        [StringLength(50, MinimumLength = 6)]
+        [Display(Name = "Address")]
+        public string CustomerAddress { get; set; }
+
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Phone")]
+        public string CustomerPhone { get; set; }
+
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email")]
+        public string CustomerEmail { get; set; }
+    }
+    public class PasswordViewModel
+    {
+        [Key]                                               
+        [Required]
+        [Display(Name = "ID")]
+        public int CustomerID { get; set; }
+
+        [Required]
+        [Display(Name = "User Name")]
+        public string CustomerUserName { get; set; }
+
+        [Required]
+        [Display(Name = "Password")]
+        [DataType(DataType.Password)]
+        public string CustomerPassword { get; set; }
+
+        [Required]
+        [Display(Name = "New Password")]
+        [DataType(DataType.Password)]
+        public string NewPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Confirm Password")]
+        [Compare("NewPassword", ErrorMessage = "The password and confirmation password do not match.")]
+        [DataType(DataType.Password)]
+        public string ConfirmPassword { get; set; }
+
+
+
     }
 }
