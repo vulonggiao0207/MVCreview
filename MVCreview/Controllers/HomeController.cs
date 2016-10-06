@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MVCreview.Models;
 
 namespace MVCreview.Controllers
 {
@@ -17,7 +18,10 @@ namespace MVCreview.Controllers
         // GET: Menu
         public ActionResult Menu()
         {
-            return View();
+            DatabaseContext db = new DatabaseContext();
+
+            var menu =db.Dishes.Select(c=> new {c.DishID,c.DishName,c.Price,c.Description,c.ImageLink,c.Availability});  
+            return View(menu);
         }
         // GET: Catering
         public ActionResult Catering()
