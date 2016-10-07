@@ -43,8 +43,8 @@ namespace MVCreview.Models
     {
         [Key]
         [Required]
-        public int DishID { get; set; }     
-       
+        public int DishID { get; set; }
+
         [Required]
         [StringLength(30, MinimumLength = 8)]
         public string DishName { get; set; }
@@ -59,6 +59,12 @@ namespace MVCreview.Models
         public string ImageLink { get; set; }
 
         [Required]
+        [DataType(DataType.Currency)]
         public decimal Availability { get; set; }
+
+        [Required]
+        [DataType(DataType.Currency)]
+        public decimal orderNO { get; set; }
+
     }
 }

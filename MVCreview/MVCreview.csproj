@@ -200,6 +200,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -229,6 +230,7 @@
     <Compile Include="Models\Dish.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetail.cs" />
+    <Compile Include="Models\ShoppingCartViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -246,6 +248,8 @@
     <Content Include="Views\Account\AccountManagement.cshtml" />
     <Content Include="Views\Account\Details.cshtml" />
     <Content Include="Views\Account\Password.cshtml" />
+    <Content Include="Views\Home\Menu.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -255,6 +259,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Dishes\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201610040500116_InitialCreate.resx">

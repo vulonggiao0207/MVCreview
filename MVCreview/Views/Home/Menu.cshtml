@@ -1,0 +1,65 @@
+﻿@model IEnumerable<MVCreview.Models.DishViewModel>
+
+@{
+    ViewBag.Title = "Menu";
+}
+
+<h2>Menu</h2>
+
+
+
+@Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <table class="table">
+
+        @foreach (var item in Model)
+        {
+            if (item.Availability > 0)
+            {
+                using (Html.BeginForm("Menu", "Home", new { dishID = item.DishID, quantity = 1 }, FormMethod.Post, null))
+                {
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            @Html.DisplayFor(modelItem => item.DishName)
+                            </div>
+</td>
+                    <td>
+                        <div class="form-group">
+                            @Html.DisplayFor(modelItem => item.Price)
+                            </div>
+</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        <a href='@Url.Action("MyAction", "MyController")'>
+                            <img src='@Url.Content(item.ImageLink)' class="img-responsive img-thumbnail" style="width:70px;height:70px" />
+                        </a>
+
+                    </td>
+
+                    <td>
+                        <div class="form-group">
+                            @Html.DisplayFor(modelItem => item.Availability)
+                            </div>
+                        </td>
+                    <td>                                           
+                        @Html.HiddenFor(modelItem=>item.DishID)
+                        <div class="form-group">                            
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Add" class="btn btn-default" style="background-color:#00ff21"/>
+                                </div>                            
+                        </div>
+                    
+                    </td>
+                </tr>
+
+                }
+            }
+        }
+
+
+</table>
+ </div>
+

@@ -131,14 +131,13 @@ namespace MVCreview.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("AccountManagement", "Account");
+                    return RedirectToAction("AccountManagement", "Account", new { CustomerID = CustomerID });
                 }
             }
             catch
             {
                 return View("Error");
-            }
-            return View();
+            }       
         }
         //POST:/Account/Register/RegisterViewModel   
 
@@ -163,7 +162,7 @@ namespace MVCreview.Controllers
                     
                     db.SaveChanges();
                     Session["userName"] = model.CustomerName;
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("AccountManagement", "Account", new { CustomerID = model.CustomerID });
                 }
                 else
                 {
@@ -192,7 +191,7 @@ namespace MVCreview.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("AccountManagement", "Account", new { CustomerID = CustomerID });
                 }
             }
             catch
@@ -218,7 +217,7 @@ namespace MVCreview.Controllers
                     customer.CustomerUserName = model.CustomerUserName;
                     customer.CustomerPassword = model.NewPassword;                        
                     db.SaveChanges();
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("AccountManagement", "Account", new { CustomerID = model.CustomerID });
                 }
                 else
                 {

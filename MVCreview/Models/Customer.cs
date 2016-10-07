@@ -44,6 +44,7 @@ namespace MVCreview
         [StringLength(12, MinimumLength = 6)]
         public string CustomerPassword { get; set; }
 
+      
         [Display(Name = "Delete")]
         public bool Del { get; set; }
 
