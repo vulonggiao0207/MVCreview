@@ -89,38 +89,37 @@ namespace MVCreview.Controllers
             Session.Remove("customerID");
             return RedirectToAction("Index", "Home");
         }
-      
-        [AllowAnonymous]
+
         //Get: Account/AccountManagement/7
-        public ActionResult AccountManagement(int CustomerID)
+        public ActionResult AccountManagement()
         {
             try
             {
                 if (Session["customerID"] != null)
                 {
                     DatabaseContext db = new DatabaseContext();
-                    Customer res = db.Customers.FirstOrDefault(c => c.CustomerID == CustomerID);
+                    Customer res = db.Customers.FirstOrDefault(c => c.CustomerID ==Int32.Parse(Session["customerID"].ToString()));
                     return View(res);
                 }
-                else
-                {
-                    return RedirectToAction("Index", "Home");
-                }
+
+                return RedirectToAction("Login", "Account");
+
             }
             catch
             {
                 return View("Error");
-            }   
+            }
         }
+       
         [AllowAnonymous]
-        public ActionResult Details(int CustomerID)
+        public ActionResult Details()
         {
             try
             {
                 if (Session["customerID"] != null)
                 {
                     DatabaseContext db = new DatabaseContext();
-                    Customer res = db.Customers.FirstOrDefault(c => c.CustomerID == CustomerID);
+                    Customer res = db.Customers.FirstOrDefault(c => c.CustomerID == Int32.Parse(Session["customerID"].ToString()));
                     DetailsViewModel details = new DetailsViewModel();
                     details.CustomerID = res.CustomerID;
                     details.CustomerAddress = res.CustomerAddress;
@@ -131,7 +130,7 @@ namespace MVCreview.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("AccountManagement", "Account", new { CustomerID = CustomerID });
+                    return RedirectToAction("AccountManagement", "Account", new { CustomerID = Int32.Parse(Session["customerID"].ToString()) });
                 }
             }
             catch
@@ -175,14 +174,14 @@ namespace MVCreview.Controllers
             }
         }
         [AllowAnonymous]
-        public ActionResult Password(int CustomerID)
+        public ActionResult Password()
         {
             try
             {
                 if (Session["customerID"] != null)
                 {
                     DatabaseContext db = new DatabaseContext();
-                    Customer res = db.Customers.FirstOrDefault(c => c.CustomerID == CustomerID);
+                    Customer res = db.Customers.FirstOrDefault(c => c.CustomerID == Int32.Parse(Session["customerID"].ToString()));
                     PasswordViewModel password = new PasswordViewModel();
                     password.CustomerID = res.CustomerID;
                     password.CustomerUserName = res.CustomerUserName;
@@ -191,7 +190,7 @@ namespace MVCreview.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("AccountManagement", "Account", new { CustomerID = CustomerID });
+                    return RedirectToAction("AccountManagement", "Account", new { CustomerID = Int32.Parse(Session["customerID"].ToString()) });
                 }
             }
             catch

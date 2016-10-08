@@ -8,23 +8,41 @@
 @Html.AntiForgeryToken()
 <div class="form-horizontal">
     <table class="table">
+        @if(Model!=null){
+            foreach (var item in Model)
+            {
+            <tr>   
+                <td>
+                    @Html.EditorFor(modelItem => item.quantity)                    
+                </td>               
+                <td>
+                    @Html.DisplayFor(modelItem => item.dishName)
+                </td>  
+                <td>
+                    $@Html.DisplayFor(modelItem => item.dishPrice)
+                </td>                
+                <td>
+                    @{
+                        var total = item.dishPrice * item.quantity;}
+                    = $@total.ToString()
+                </td>
+                <td>
+                    @Html.HiddenFor(modelItem => item.dishID)
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Delete" class="btn btn-default" style="background-color:#ff0000" />
+                        </div>
+                    </div>
 
-        @foreach (var item in Model)
-        {            
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.dishID)
-                </td>     
-                <td>
-                    @Html.DisplayFor(modelItem =>item.quantity)
-                </td>   
+                </td>
                                    
             </tr>
             
         }
+        }
 
     </table>
-    @using (Html.BeginForm("CheckOut", "ShoppingCart"))
+    @using (Html.BeginForm("Checkout", "ShoppingCart", new { cart = Model },null, null))
     {
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

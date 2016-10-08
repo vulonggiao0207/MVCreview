@@ -42,7 +42,7 @@ namespace MVCreview.Controllers
         }            
         
         [HttpPost]
-        public ActionResult Menu(int dishID, decimal quantity)
+        public ActionResult Menu(int dishID, string dishname, decimal price, decimal quantity)
         {
           
             List<ShoppingCartViewModel> cart;
@@ -58,6 +58,8 @@ namespace MVCreview.Controllers
 
             ShoppingCartViewModel item = new ShoppingCartViewModel();
             item.dishID = dishID;
+            item.dishName = dishname;
+            item.dishPrice = price;
             item.quantity = 1;
             cart.Add(item);
             Session["shoppingCart"] = cart;

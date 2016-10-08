@@ -16,7 +16,7 @@
         {
             if (item.Availability > 0)
             {
-                using (Html.BeginForm("Menu", "Home", new { dishID = item.DishID, quantity = 1 }, FormMethod.Post, null))
+                using (Html.BeginForm("Menu", "Home", new { dishID = item.DishID, dishname = item.DishName, price = item.Price, quantity = 1 }, FormMethod.Post, null))
                 {
                 <tr>
                     <td>
@@ -27,7 +27,7 @@
                     <td>
                         <div class="form-group">
                             @Html.DisplayFor(modelItem => item.Price)
-                            </div>
+                         </div>
 </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Description)
@@ -38,13 +38,8 @@
                         </a>
 
                     </td>
-
                     <td>
-                        <div class="form-group">
-                            @Html.DisplayFor(modelItem => item.Availability)
-                            </div>
-                        </td>
-                    <td>                                           
+                                                            
                         @Html.HiddenFor(modelItem=>item.DishID)
                         <div class="form-group">                            
                                 <div class="col-md-offset-2 col-md-10">

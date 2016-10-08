@@ -250,6 +250,7 @@
     <Content Include="Views\Account\Password.cshtml" />
     <Content Include="Views\Home\Menu.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\ShoppingCart\Checkout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

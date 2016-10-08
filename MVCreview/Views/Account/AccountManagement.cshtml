@@ -6,8 +6,13 @@
 
 <h2>Account Management</h2>
 <div>
+    @{ 
+        if (Model != null) { 
     <hr />
     <dl class="dl-horizontal">
+        <dd>
+            @Html.HiddenFor(model => model.CustomerID)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.CustomerName)
         </dt>
@@ -49,8 +54,10 @@
         </dd>
        
        
-
     </dl>
+        }
+    }
+
 </div>
 <p>
     @Html.ActionLink("Edit information", "Details", new { CustomerID = Session["customerID"] }) |

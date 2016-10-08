@@ -11,11 +11,25 @@ namespace MVCreview.Controllers
     {
         // GET: ShoppingCart
         public ActionResult Index()
-        {                              
-            var cart = (List<ShoppingCartViewModel>)Session["shoppingCart"];
-            return View(cart);   
-            
-        }           
+        {
+            try
+            {
+                if (Session["shoppingCart"] != null)
+                { 
+                    var cart = (List<ShoppingCartViewModel>)Session["shoppingCart"];
+                    return View(cart);
+                }
+                return RedirectToAction("Menu","Home");
+            }
+            catch {
+                return RedirectToAction("Error");
+            }               
+        }
+        [HttpGet]
+        public ActionResult Checkout(List<ShoppingCartViewModel> cart)
+        {
+            return View();   
+        }
 
 
     }
